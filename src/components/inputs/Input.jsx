@@ -40,6 +40,9 @@ const Input = ({
         `}>
             {label}
         </label>
+        { errors[id] && (
+            <div className='text-rose-400 font-thin text-sm mt-1'>{errors[id].message}</div>
+        )}
     </div>
   )
 }

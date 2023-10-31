@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { AiFillGihub, AiFillGithub} from 'react-icons/ai'
+import { AiFillGithub} from 'react-icons/ai'
 import {FcGoogle} from 'react-icons/fc'
 import { useCallback, useState } from 'react'
 import {
@@ -11,14 +11,17 @@ import Heading from '../Heading'
 import Input from '../inputs/Input';
 import toast from 'react-hot-toast'
 import Button from '../Button'
+import useLoginModal from '../../hooks/useLoginMoal'
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
   const [loading, setLoading] = useState(false);
 
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors }
   } = useForm({
     defaultValues:{
@@ -31,18 +34,31 @@ const RegisterModal = () => {
   const onSubmit = (data) => {
     setLoading(true);
 
-    axios.post('/api/register', data)
-      .then(()=> {
-        registerModal.onClose();
+    axios.post('/api/auth/signup', data)
+      .then(result=> {
+          console.log(result);
+          toast.success('회원가입 완료');
+          registerModal.onClose();
       })
       .catch(error=>{
-        console.log(error)
+        const errors = error.response.data;
+        if(errors.email) {
+          setError('email',{type:'server', message: errors.email.msg})
+        }
+        if(errors.password) {
+          setError('password',{type:'server', message: errors.password.msg})
+        }
         toast.error('회원가입 실패')
       })
       .finally(()=>{
         setLoading(false)
       })
   }
+
+  const onToggle = useCallback(()=>{
+    registerModal.onClose();
+    loginModal.onOpen();
+  },[registerModal, loginModal])
 
   const bodyContent = (
     <div className='flex flex-col gap-4'>
@@ -90,7 +106,7 @@ const RegisterModal = () => {
             <span>
               이미 에어비엔비 계정이 있으신가요?
             </span>
-            <span onClick={registerModal.onClose} className='text-neutral-800 cursor-pointer hover:underline'>
+            <span onClick={onToggle} className='text-neutral-800 cursor-pointer hover:underline'>
               로그인
             </span>
           </div>
