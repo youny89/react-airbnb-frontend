@@ -1,5 +1,5 @@
-import useUserStore from "../../hooks/useUserStore"
 import Container from "../Container"
+import Categories from "./category/Categories"
 import Logo from "./Logo"
 import Search from "./Search"
 import UserMenu from "./UserMenu"
@@ -17,6 +17,7 @@ const Navbar = () => {
                     </div>
                 </Container>
             </div>
+            <Categories />
         </nav>
     )
 }
