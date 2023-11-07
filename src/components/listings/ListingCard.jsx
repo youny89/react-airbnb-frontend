@@ -20,8 +20,6 @@ const ListingCard = ({
     const { getByValue } = useCountries();
     const location = getByValue(data.locationValue)
 
-    console.log('currentUser in ListingCard : ', currentUser);
-
     const handleCancel = useCallback((e)=>{
         e.stopPropagation();
         if(disabled) return;

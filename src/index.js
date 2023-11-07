@@ -5,6 +5,7 @@ import App from './App';
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/Home';
+import ListingPage from './pages/Listing';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
       {
         index:true,
         element:<Home />
+      },
+      {
+        path:"/listings/:id",
+        element:<ListingPage />
       }
     ]
   }
