@@ -4,11 +4,18 @@ import './index.css';
 import App from './App';
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Home from './pages/Home';
 
 const router = createBrowserRouter([
   {
     path:'/',
-    element:<App />
+    element:<App />,
+    children:[
+      {
+        index:true,
+        element:<Home />
+      }
+    ]
   }
 ]);
 

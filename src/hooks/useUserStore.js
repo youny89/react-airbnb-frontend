@@ -1,15 +1,24 @@
+import axios from 'axios';
 import { create } from 'zustand';
-import { persist, createJSONStorage} from 'zustand/middleware'
+import { persist} from 'zustand/middleware'
 
 const useUserStore = create(
     persist(
         (set, get) => ({
             currentUser:null,
             login:(user)=> {
-                set({currentUser: user})
+                const {accessToken, ...others} = user;
+                set({
+                    currentUser: {...others},
+                    accessToken: accessToken
+                })
             },
             logout:()=>{
-                set({currentUser:null})
+                set({currentUser:null, accessToken:''})
+            },
+            update:async () => {
+                const res = await axios.get('/api/users/me')
+                set({currentUser: res.data})
             } 
         }),
         {

@@ -1,0 +1,5 @@
+숙소 업르도 실피: 400 -> 로그인 실패로 뜸
+
+post api 요청시 access token을 Authorization에 제공을 했으나 백엔드에서 받지 못한듯 싶다.
+
+need to check: cors 관련해서 Authroziation 접근을 허용해줘야 될듯?
