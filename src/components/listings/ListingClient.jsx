@@ -46,11 +46,12 @@ const ListingClient = ({
                 end: new Date(reservation.endDate)
             });
 
-            dates = [...dates, ranges]
+            dates = [...dates, ...ranges]
         })
 
         return dates;
     },[reservations])
+
 
     const category = useMemo(()=>{
         return categories.find(item=> item.label === list.category);
@@ -65,14 +66,14 @@ const ListingClient = ({
             totalPrice,
             startDate: dateRange.startDate,
             endDate: dateRange.endDate,
-            listId: list.id
+            listId: list?._id
         })
         .then(()=>{
             toast.success('예약 완료')
             setDateRange(initialDateRange)
 
             // redirect to trips
-            window.location.reload();
+            navigate('/trip')
         })
         .catch(()=>{
             toast.error('예약 실패')

@@ -1,11 +1,12 @@
 import React from 'react';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import App from './App';
 import Home from './pages/Home';
 import ListingPage from './pages/Listing';
+import TripPage from './pages/Trip';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path:"/listings/:id",
         element:<ListingPage />
+      },
+      {
+        path:'/trip',
+        element: <TripPage />
       }
     ]
   }

@@ -6,15 +6,19 @@ import ListingClient from "../components/listings/ListingClient";
 
 const ListingPage = () => {
     const params = useParams();
-    const {data, error, loading} = useFetchData(`/api/listings/${params?.id}`)
-    const currentUser = useUserStore(state=>state.currentUser)
+    const {data:list, error:listError, loading:listLoading} = useFetchData(`/api/listings/${params?.id}`)
+    const {data:reservations, error:resversationError, loading:reservationLoading} = useFetchData(`/api/reservations?listId=${params.id}`)
 
-    if(!data) {
+    const currentUser = useUserStore(state=>state.currentUser)
+    if(!list) {
         return <EmptyContent title="해당 숙소를 찾을수 없습니다."/>
     }
 
     return (
-        <ListingClient list={data} currentUser={currentUser}/>
+        <ListingClient
+            reservations={reservations || []}
+            list={list}
+            currentUser={currentUser}/>
     )
 }
 

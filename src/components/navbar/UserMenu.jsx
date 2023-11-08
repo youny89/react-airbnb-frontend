@@ -6,8 +6,10 @@ import useRegisterModal from '../../hooks/useRegisterModal';
 import useLoginModal from '../../hooks/useLoginMoal';
 import useUserStore from '../../hooks/useUserStore';
 import useRentModal from '../../hooks/useRentModal';
+import { useNavigate } from 'react-router-dom';
 
 const UserMenu = () => {
+  const navigate = useNavigate();
   const [ isOpen, setIsOpen] = useState(false)    
   const currentUser = useUserStore(state=> state.currentUser);
   const registerModal = useRegisterModal()
@@ -48,7 +50,7 @@ const UserMenu = () => {
                 <div className='flex flex-col cursor-pointer'>
                     <>
                         {currentUser ? <>
-                            <MenuItem label="여행" onClick={onLogout}/>
+                            <MenuItem label="여행" onClick={()=> navigate('/trip')}/>
                             <MenuItem label="위시리시트" onClick={onLogout}/>
                             <MenuItem label="예약" onClick={onLogout}/>
                             <MenuItem label="my properties" onClick={onLogout}/>

@@ -15,6 +15,7 @@ const ListingCard = ({
     actionId,
     onAction
 }) => {
+
     const navigate = useNavigate();
     const currentUser = useUserStore(state=> state.currentUser);
     const { getByValue } = useCountries();
@@ -32,13 +33,13 @@ const ListingCard = ({
         return data.price;
     },[reservation, data.price])
 
-    const reserverDate = useMemo(()=>{
+    const reserveDate = useMemo(()=>{
         if(!reservation) return ;
 
-        const start = new Date(reserverDate.startDate);
-        const end = new Date(reserverDate.endDate);
+        const start = new Date(reservation.startDate);
+        const end = new Date(reservation.endDate);
 
-        return `${format(start,('PP'))} ${format(end,'PP')}`
+        return `${format(start,('yyyy-MM-dd'))} ~ ${format(end,'yyyy-MM-dd')}`
     },[reservation])
 
 
@@ -68,7 +69,7 @@ const ListingCard = ({
                         {location?.region}, {location?.label}
                     </div>
                     <div className="font-light text-neutral-500">
-                        {reserverDate || data.category}
+                        {reserveDate  || data.category}
                     </div>
                     <div className="flex flex-row items-center">
                         <div className="font-sembold">
