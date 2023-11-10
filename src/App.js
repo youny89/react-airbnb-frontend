@@ -5,11 +5,13 @@ import RegisterModal from "./components/modals/RegisterModal";
 import Navbar from "./components/navbar/Navbar";
 import LoginModal from './components/modals/LoginModal';
 import RentModal from './components/modals/RentModal';
+import SearchModal from './components/modals/SearchModal';
 
 function App() {
   return (
     <>
       <ToastProvider />
+      <SearchModal />
       <RegisterModal/>
       <LoginModal />
       <RentModal />

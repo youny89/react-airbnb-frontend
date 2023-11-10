@@ -1,3 +1,5 @@
+import { useSearchParams } from "react-router-dom";
+import qs from 'query-string';
 import Container from "../components/Container"
 import EmptyContent from "../components/EmptyContent";
 import ListingCard from "../components/listings/ListingCard";
@@ -5,9 +7,16 @@ import ListingCard from "../components/listings/ListingCard";
 import useFetchData from '../hooks/useFetchData';
 
 const Home = () => {
+    const [searchParams,setSearchParams] = useSearchParams()
 
-    const { data, loading, error } = useFetchData('/api/listings');
+    const query = qs.parse(searchParams.toString());
+    const urlWithQuery = qs.stringifyUrl({
+        url:'/api/listings',
+        query
+    })
 
+    const { data, loading, error } = useFetchData(urlWithQuery);
+    
     if(!loading && data?.length === 0) {
         return (
             <EmptyContent showReset/>

@@ -7,6 +7,9 @@ import App from './App';
 import Home from './pages/Home';
 import ListingPage from './pages/Listing';
 import TripPage from './pages/Trip';
+import ReservationPage from './pages/Reservation';
+import FavoritePage from './pages/Favorite';
+import Myhouse from './pages/Myhouse';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +27,18 @@ const router = createBrowserRouter([
       {
         path:'/trip',
         element: <TripPage />
+      },
+      {
+        path:'/reservation',
+        element: <ReservationPage />
+      },
+      {
+        path:'/favorite',
+        element: <FavoritePage />
+      },
+      {
+        path:'/my-house',
+        element: <Myhouse />
       }
     ]
   }

@@ -1,12 +1,14 @@
-import { AiOutlineMenu } from 'react-icons/ai'
-import Avatar from '../Avatar'
 import { useCallback, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { AiOutlineMenu } from 'react-icons/ai'
+
+import Avatar from '../Avatar'
 import MenuItem from './MenuItem'
+
 import useRegisterModal from '../../hooks/useRegisterModal';
 import useLoginModal from '../../hooks/useLoginMoal';
 import useUserStore from '../../hooks/useUserStore';
 import useRentModal from '../../hooks/useRentModal';
-import { useNavigate } from 'react-router-dom';
 
 const UserMenu = () => {
   const navigate = useNavigate();
@@ -20,7 +22,7 @@ const UserMenu = () => {
   const toggleOpen = useCallback(()=> setIsOpen(value => !value) ,[])
 
   const onRent = useCallback(()=>{
-    // if(!currentUser) return loginModal.onOpen();
+    if(!currentUser) return loginModal.onOpen();
 
     //TODO: Open rent modal;
     rentModal.onOpen();
@@ -51,13 +53,12 @@ const UserMenu = () => {
                     <>
                         {currentUser ? <>
                             <MenuItem label="여행" onClick={()=> navigate('/trip')}/>
-                            <MenuItem label="위시리시트" onClick={onLogout}/>
-                            <MenuItem label="예약" onClick={onLogout}/>
-                            <MenuItem label="my properties" onClick={onLogout}/>
+                            <MenuItem label="위시리시트" onClick={()=> navigate('/favorite')}/>
+                            <MenuItem label="예약" onClick={()=> navigate('/reservation')}/>
                             <hr />
                             <MenuItem label="계정" onClick={onLogout}/>
-                            <MenuItem label="숙소 관리" onClick={onLogout}/>
-                            <MenuItem label="당신의 공간을 에어비엔비 하세요" onClick={onLogout}/>
+                            <MenuItem label="숙소 관리" onClick={()=> navigate('my-house')}/>
+                            <MenuItem label="당신의 공간을 에어비엔비 하세요" onClick={onRent}/>
                             <hr />
                             <MenuItem label="로그아웃" onClick={onLogout}/>
                         </> : <>

@@ -21,6 +21,10 @@ const ListingCard = ({
     const { getByValue } = useCountries();
     const location = getByValue(data.locationValue)
 
+    const handleClick = useCallback((e)=>{
+        navigate(`/listings/${data._id}`)
+    },[navigate, data._id]);
+
     const handleCancel = useCallback((e)=>{
         e.stopPropagation();
         if(disabled) return;
@@ -46,7 +50,7 @@ const ListingCard = ({
 
     return (
         <div 
-            onClick={() => navigate(`/listings/${data._id}`)}
+            onClick={(e)=>handleClick(e)}
             className="col-span-1 cursor-pointer group">
             <div className="flex flex-col gap-2 w-full">
                 <div className="aspect-square w-full relative overflow-hidden rounded-xl">
@@ -62,7 +66,7 @@ const ListingCard = ({
                             currentUser={currentUser}
                         />
                     </div>
-
+                    
                 </div>
                 
                 <div className="font-sembold text-lg">
@@ -86,7 +90,7 @@ const ListingCard = ({
                         disabled={disabled}
                         small
                         label={actionLabel}
-                        onoClick={handleCancel}
+                        onClick={handleCancel}
                      />   
                     )}
             </div>

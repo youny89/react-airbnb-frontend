@@ -73,7 +73,7 @@ const Modal = ({
                                     {secondaryAction && secondaryActionText && (
                                         <Button
                                             outline
-                                            onClick={secondaryAction}
+                                            onClick={handleSecondaryAction}
                                             disabled={disabled}
                                             label={secondaryActionText}/>
                                     )}
