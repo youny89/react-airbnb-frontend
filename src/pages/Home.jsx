@@ -1,8 +1,10 @@
 import { useSearchParams } from "react-router-dom";
 import qs from 'query-string';
+
 import Container from "../components/Container"
 import EmptyContent from "../components/EmptyContent";
 import ListingCard from "../components/listings/ListingCard";
+import Loader from '../components/Loader'
 
 import useFetchData from '../hooks/useFetchData';
 
@@ -16,8 +18,10 @@ const Home = () => {
     })
 
     const { data, loading, error } = useFetchData(urlWithQuery);
-    
-    if(!loading && data?.length === 0) {
+    console.log('loading : ',loading);
+    if(loading) return <Loader />
+
+    if(data?.length === 0) {
         return (
             <EmptyContent showReset/>
         )

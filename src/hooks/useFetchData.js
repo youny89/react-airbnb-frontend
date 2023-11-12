@@ -11,6 +11,7 @@ const useFetchData = (url) => {
     axios.defaults.headers.common['Authorization'] = accessToken ? `Bearer ${accessToken}` : undefined;
 
     useEffect(()=>{
+        setLoading(true);
         if(url) {
             axios.get(url)
                 .then(response=>setData(response.data))
